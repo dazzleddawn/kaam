@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: kaam
-  newTag: "0.1"
+  newTag: "1.0"
