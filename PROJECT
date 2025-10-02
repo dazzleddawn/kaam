@@ -8,4 +8,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: kaam
 repo: github.com/abit2/kaam
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: abit2.com
+  group: jobs
+  kind: Job
+  path: github.com/abit2/kaam/api/v1
+  version: v1
 version: "3"
