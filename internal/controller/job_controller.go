@@ -25,7 +25,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 
-	appsv1 "github.com/abit2/kaam/api/v1"
 	jobsv1 "github.com/abit2/kaam/api/v1"
 )
 
@@ -55,7 +54,7 @@ func (r *JobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 	logger.Info("Reconciling Job", "namespace", req.Namespace, "name", req.Name)
 
 	// get the job for the namespace
-	var job appsv1.Job
+	var job jobsv1.Job
 	if err := r.Get(ctx, req.NamespacedName, &job); err != nil {
 		logger.Error(err, "err getting job resource")
 		// ignore as the resource is not found
