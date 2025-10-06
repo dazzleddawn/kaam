@@ -51,7 +51,13 @@ var _ = Describe("Job Controller", func() {
 						Name:      resourceName,
 						Namespace: "default",
 					},
-					// TODO(user): Specify other spec details if needed.
+					Spec: jobsv1.JobSpec{
+						Replicas: 2,
+						Volume: jobsv1.VolumeSpec{
+							Name:    resourceName + "-volume",
+							Storage: "100Mi",
+						},
+					},
 				}
 				Expect(k8sClient.Create(ctx, resource)).To(Succeed())
 			}
@@ -66,6 +72,7 @@ var _ = Describe("Job Controller", func() {
 			By("Cleanup the specific resource instance Job")
 			Expect(k8sClient.Delete(ctx, resource)).To(Succeed())
 		})
+
 		It("should successfully reconcile the resource", func() {
 			By("Reconciling the created resource")
 			controllerReconciler := &JobReconciler{
