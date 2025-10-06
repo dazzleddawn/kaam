@@ -1,0 +1,13 @@
+apiVersion: jobs.abit2.com/v1
+kind: Job
+metadata:
+  labels:
+    app.kubernetes.io/name: kaam
+    app.kubernetes.io/managed-by: kustomize
+  name: job-sample
+spec:
+  # TODO(user): Add fields here
+  replicas: 3
+  volume:
+    name: xyz-volume
+    storage: 100Mi
