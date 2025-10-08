@@ -67,7 +67,13 @@ func (r *JobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 		return ctrl.Result{}, err
 	}
 
-	if err := r.Create(ctx, statefulSet); err != nil && !apierrors.IsAlreadyExists(err) {
+	if err := r.Create(ctx, statefulSet); err != nil {
+		if apierrors.IsAlreadyExists(err) {
+			updateErr := r.Update(ctx, statefulSet)
+			if updateErr != nil {
+				return ctrl.Result{}, updateErr
+			}
+		}
 		logger.Error(err, "err creating statefulset")
 		return ctrl.Result{}, err
 	}
