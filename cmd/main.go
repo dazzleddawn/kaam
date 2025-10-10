@@ -20,6 +20,7 @@ import (
 	"crypto/tls"
 	"flag"
 	"os"
+	"time"
 
 	// Import all Kubernetes client auth plugins (e.g. Azure, GCP, OIDC, etc.)
 	// to ensure that exec-entrypoint and run can make use of them.
@@ -36,6 +37,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
 	jobsv1 "github.com/abit2/kaam/api/v1"
+	"github.com/abit2/kaam/drainer"
 	"github.com/abit2/kaam/internal/controller"
 	// +kubebuilder:scaffold:imports
 )
@@ -194,6 +196,11 @@ func main() {
 	if err := mgr.AddReadyzCheck("readyz", healthz.Ping); err != nil {
 		setupLog.Error(err, "unable to set up ready check")
 		os.Exit(1)
+	}
+
+	drainer := drainer.New(1 * time.Second)
+	if err := mgr.Add(drainer); err != nil {
+		setupLog.Error(err, "unable to set up drain job")
 	}
 
 	setupLog.Info("starting manager")

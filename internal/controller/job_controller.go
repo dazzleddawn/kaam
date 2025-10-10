@@ -73,6 +73,7 @@ func (r *JobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 			if updateErr != nil {
 				return ctrl.Result{}, updateErr
 			}
+			return ctrl.Result{}, nil
 		}
 		logger.Error(err, "err creating statefulset")
 		return ctrl.Result{}, err
