@@ -13,6 +13,8 @@ import (
 	appsv1 "github.com/abit2/kaam/api/v1"
 )
 
+const drainFinalizer = "jobs.abit2.com/drain"
+
 func (r *JobReconciler) createStatefulSet(ctx context.Context, job appsv1.Job) (*kappsv1.StatefulSet, error) {
 	logger := logf.FromContext(ctx)
 
