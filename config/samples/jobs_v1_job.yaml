@@ -11,3 +11,5 @@ spec:
   volume:
     name: xyz-volume
     storage: 100Mi
+  drain:
+    backoff_limit: 2

@@ -39,6 +39,14 @@ spec:
           spec:
             description: spec defines the desired state of Job
             properties:
+              drain:
+                properties:
+                  backoff_limit:
+                    format: int32
+                    type: integer
+                required:
+                - backoff_limit
+                type: object
               replicas:
                 format: int32
                 type: integer
@@ -53,6 +61,7 @@ spec:
                 - storage
                 type: object
             required:
+            - drain
             - volume
             type: object
           status:

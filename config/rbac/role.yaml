@@ -30,6 +30,7 @@ rules:
   - update
   - watch
 - apiGroups:
+  - batch
   - jobs.abit2.com
   resources:
   - jobs

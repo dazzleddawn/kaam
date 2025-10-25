@@ -32,6 +32,11 @@ type JobSpec struct {
 
 	Replicas int32      `json:"replicas,omitempty"`
 	Volume   VolumeSpec `json:"volume"`
+	Drain    DrainSpec  `json:"drain"`
+}
+
+type DrainSpec struct {
+	BackoffLimit int32 `json:"backoff_limit"`
 }
 
 type VolumeSpec struct {
